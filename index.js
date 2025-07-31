@@ -24,9 +24,9 @@ function isVegitable(x) {
     }
 }
 // : x is Vegitable   // جملة الرترن دي معاناها ان لو رجعت ترو اذا اكس ده فيجيتبول
-// (we this type narrowing)
+// (we call this type narrowing)
 //
-// Type Guard
+// Type Guard ex.2
 function isAdmin(user) {
     return user.role === "admin"; // لو ترو هيبقي هوا ادمن //narrowing
 }
@@ -45,7 +45,7 @@ function throwError(message) {
 function fail() {
     return throwError("Something went wrong!");
 }
-var shape = "square"; // مش هيقبل غيرها 
+var shape = "square"; // مش هيقبل غيرها
 //Partial
 function updateUser(updates) {
     console.log("Updating  ".concat(updates));
@@ -73,13 +73,13 @@ var todo = {
     title: "Delete users",
 };
 // todo.title = "Hello";   ممنوع اعمل reassign لل title
-//Awaited 
-// بيحاكي ال async await 
+//Awaited
+// بيحاكي ال async await
 //&& type A = Awaited<Promise<string>>;
 //&& type A = string
 //* لوعندي تايب type User = Awaited<ReturnType<typeof fetchUser>>;
-//* fetchUser => دي الفانكشن اللي بتكول الباك اند مثلا 
-// مثال ف رياكت كومبوننت 
+//* fetchUser => دي الفانكشن اللي بتكول الباك اند مثلا
+// مثال ف رياكت كومبوننت
 //* import React, { useEffect, useState } from "react";
 // function UserProfile() {
 //& const [user, setUser] = useState< User | null>(null);

@@ -44,7 +44,7 @@ function getNames(name1: string, name2: string): string {
 
 console.log(getNames("salma", " ahmed "));
 
-//type guard
+//Type Guard ex.1
 interface Fruit {
   name: string;
   color: string;
@@ -66,10 +66,10 @@ function isVegitable(x: Vegitable | Fruit): x is Vegitable {
 }
 
 // : x is Vegitable   // جملة الرترن دي معاناها ان لو رجعت ترو اذا اكس ده فيجيتبول
-// (we this type narrowing)
+// (we call this type narrowing)
 //
 
-// Type Guard
+// Type Guard ex.2
 function isAdmin(user: Admin | RegularUser): user is Admin {
   return user.role === "admin"; // لو ترو هيبقي هوا ادمن //narrowing
 }
@@ -84,8 +84,6 @@ const num = Number("123");
 console.log(num); // 123 number
 //بقول للغه هنا تحولي القيمه دي ف الرن تايم للنوع ده يعني بغير قيمه لنوع اخر
 
-
-
 // never
 // لو مستحيل اوصل لحاجه معينه
 
@@ -96,17 +94,14 @@ function throwError(message: string): never {
 function fail(): never {
   return throwError("Something went wrong!");
 }
- //الداله مش هتكمل تنفيذها هيحصل ايرور
+//الداله مش هتكمل تنفيذها هيحصل ايرور
 
+//  Unit Type
 
-//  Unit Type 
+type Square = "square"; // يحتوي علي قيمه واحده فقط لا يمكن تغييرها
 
-type Square = "square" // يحتوي علي قيمه واحده فقط لا يمكن تغييرها 
-
-const shape :Square ="square" // مش هيقبل غيرها 
-//كمان زي ال null, undefiend 
-
-
+const shape: Square = "square"; // مش هيقبل غيرها
+//كمان زي ال null, undefiend
 
 //& Some of  Utility Types ==>>>>
 
@@ -119,11 +114,10 @@ interface User {
 }
 
 //Partial
-function updateUser( updates: Partial<User>) {
+function updateUser(updates: Partial<User>) {
   console.log(`Updating  ${updates}`);
 }
-updateUser( { name: "Ali", isActive: false }); // اختياري احط اي بروبيرتز من الاترفيس
-
+updateUser({ name: "Ali", isActive: false }); // اختياري احط اي بروبيرتز من الاترفيس
 
 //Pick
 type NewUser = Pick<User, "id" | "name">;
@@ -134,10 +128,8 @@ const publicUser: NewUser = {
 };
 //بنتقي او بحدد عن طريقها البروبيرتز اللي عايزاها فقطط
 
-
-
-//Omit 
-//عكس الPick  // بستبعد خصائص معينه مش عايزاها 
+//Omit
+//عكس الPick  // بستبعد خصائص معينه مش عايزاها
 type User2 = Omit<User, "email" | "isActive">;
 
 const usser: User2 = {
@@ -146,13 +138,12 @@ const usser: User2 = {
   role: "user",
 };
 
-
 //Record
 //بيخليني اخد كل الكيز اللي ف نوع معين واحددلها انا تايب ثابت بنفسي
 
 type Role = "admin" | "user" | "guest";
 
-type NewRole= Record<Role, number>;
+type NewRole = Record<Role, number>;
 
 const role: NewRole = {
   admin: 2,
@@ -160,18 +151,15 @@ const role: NewRole = {
   guest: 3,
 };
 
-
-// NonNullable 
+// NonNullable
 //بنشيل بيه ال null ,undefiend من اي تايب
 
-type Email = NonNullable<User["email"]>; // كدا شيلت من البروبرتي ايميل التايب نل وسيبت الاسترنج فقط 
+type Email = NonNullable<User["email"]>; // كدا شيلت من البروبرتي ايميل التايب نل وسيبت الاسترنج فقط
 
 function sendEmail(email: Email) {
   console.log(`Sending email to ${email}`);
 }
 sendEmail("test@example.com"); // هتقبل استرنج فقط
-
-
 
 // ٌReadonly
 // بتخلي البروبرتز للقراءه فقط
@@ -179,25 +167,23 @@ sendEmail("test@example.com"); // هتقبل استرنج فقط
 interface Todo {
   title: string;
 }
- 
+
 const todo: Readonly<Todo> = {
   title: "Delete users",
 };
 
 // todo.title = "Hello";   ممنوع اعمل reassign لل title
 
-
-
-//Awaited 
-// بيحاكي ال async await 
+//Awaited
+// بيحاكي ال async await
 
 //&& type A = Awaited<Promise<string>>;
 //&& type A = string
 
 //* لوعندي تايب type User = Awaited<ReturnType<typeof fetchUser>>;
 
-//* fetchUser => دي الفانكشن اللي بتكول الباك اند مثلا 
-// مثال ف رياكت كومبوننت 
+//* fetchUser => دي الفانكشن اللي بتكول الباك اند مثلا
+// مثال ف رياكت كومبوننت
 
 //* import React, { useEffect, useState } from "react";
 
@@ -209,6 +195,3 @@ const todo: Readonly<Todo> = {
 // const data = await fetchUser();
 // setUser(data);
 // }
-
-
-
